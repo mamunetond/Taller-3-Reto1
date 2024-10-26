@@ -123,6 +123,50 @@ Le damos al botón de eliminar usuario y le damos en confirmar y nos aparece el 
 Si vuelvo a ingresar el usuario y la contraseña, nos arroja el siguiente mensaje "invalid username or password"
 
 
+#Assertions
+
+Esta prueba tiene dos assertions los cuales son:
+
+## Assertion 1: Validación correcta de la creación del usuario
+
+Se valida que se ingrese un usuario admitido y una contraseña que cumpla con los requisitos de longitud mínima de ocho caracteres, debe de incluir un número, una letra en mayúscula y un caracter especial
+
+## Assertion 2: Mensaje "invalid username or password!"
+
+Se valida que cuando se ingrese el usuario y la contraseña, aparezca el mensaje invalid username or password! esto quiere decir que el usuario no se enceuntra registrado, y de esta manera se termina la prueba.
+
+
+# Principios FIRST
+
+## Fast (Rápido):
+
+El código debe ejecutarse rápidamente para que las pruebas se puedan realizar frecuentemente. Sin embargo, en tu código se están realizando solicitudes HTTP reales, lo que puede hacer que las pruebas sean más lentas. Para cumplir este principio, sería mejor usar mocks en lugar de realizar solicitudes HTTP reales en todas las pruebas. En tu caso, ya intentaste introducir un mock para la generación de token, pero debes aplicarlo en las demás llamadas HTTP también.
+
+## Independent (Independiente):
+
+Las pruebas no deben depender unas de otras. En tu código, la prueba de creación de usuario y la prueba de eliminación dependen de que el usuario sea creado correctamente en la prueba anterior, lo que rompe este principio. Para cumplir con este principio, debes asegurarte de que cada prueba sea capaz de ejecutarse por sí sola, sin importar los resultados de las otras pruebas.
+
+## Repeatable (Repetible):
+
+Las pruebas deben producir los mismos resultados cada vez que se ejecutan. Las pruebas que dependen de servicios externos o de un estado mutable (como la creación y eliminación de un usuario real) pueden fallar si el servicio externo cambia. Usar mocks en lugar de llamadas reales garantizaría que las pruebas sean repetibles y siempre se comporten de la misma manera.
+
+## Self-validating (Auto-validables):
+
+Las pruebas deben validar automáticamente los resultados sin intervención humana. En tu caso, las pruebas parecen cumplir con este principio ya que usan aserciones como assertEquals para validar los resultados esperados.
+
+## Timely (Oportuno):
+
+Las pruebas deben escribirse en el momento adecuado, idealmente antes o durante el desarrollo del código que se está probando. No puedo juzgar directamente cuándo se escribieron las pruebas, pero el hecho de que ya estén integradas en el código es un buen indicio.
+
+
+## ¿Cómo se ven los principios FIRST reflejados en la prueba automatizada?
+
+Usaa Mockito y MockMVC para simular las respuestas de los servicios externos, simulando las respuestas de la creación de usuario, inicio de sesión y eliminación, en lugar de realizar llamadas reales a las API. Esto mejorará la velocidad y permitirá que las pruebas sean independientes.
+
+
+
+
+
 
 
 
